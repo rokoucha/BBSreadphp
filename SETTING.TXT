@@ -1,0 +1,3 @@
+BBS_TITLE=BBSreadphp掲示板
+BBS_TITLE_LINK=index.php
+BBS_NONAME_NAME=名無しさん
