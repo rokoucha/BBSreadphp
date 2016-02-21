@@ -42,7 +42,6 @@ $FileSize = "";
 echo <<< EOT1
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>{$BoardName}</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta property="og:title" content="{$BoardName}"/>
@@ -87,9 +86,9 @@ echo <<< EOT2
 					<b>
 						<a href=./topost/>書き込む前に読んでね</a>
 						 | 
-						<a href=./howtouse/＆注意>BBSreadphpガイド</a>
+						<a href=./howtouse/>BBSreadphpガイド</a>
 						 | 
-						<a href="./faq/">ＦＡＱ</a>
+						<a href="./faq/">FAQ</a>
 					</b>
 				</td>
 			</tr>
@@ -101,7 +100,7 @@ echo <<< EOT2
 				<td>
 					<font size=2>
 						<div align="left">
-							<a href="thread.php">
+							<a href="subback.php">
 								<b>スレッド一覧はこちら</b>
 							</a>
 						</div>
