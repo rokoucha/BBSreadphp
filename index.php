@@ -1,8 +1,8 @@
 <?php
-//BBSreadphp 01.00.00
+//BBSreadphp 01.01.00
 //Atnanasi
 $Root = __DIR__;
-$Version = "01.00.00";
+$Version = "01.01.00";
 $ReleaseDate = "2016/1/24";
 
 include "./libboard.php";

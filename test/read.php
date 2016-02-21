@@ -1,10 +1,10 @@
 <?php
-//read.php 01.00.00
+//read.php 01.01.00
 //Atnanasi
 chdir("..");
 $Root = __DIR__;
-$Version = "01.00.00";
-$ReleaseDate = "2016/1/22";
+$Version = "01.01.00";
+$ReleaseDate = "2016/02/21";
 
 include "./libboard.php";
 
@@ -151,15 +151,15 @@ echo <<< EOT2
 		<a href="./test/read.php?bbs={$BoardID}&key={$ThreadID}">全部</a>
 		<a href="./test/read.php?bbs={$BoardID}&key={$ThreadID}&ls=50">最新50</a>
 		<form method=POST action="./test/bbs.php">
-			<input type=submit value="書き込む" name=submit>
-			名前： <input name=FROM size=19 value={$FormNAME}>
-			E-mail<font size=1> (省略可) </font>: <input name=mail size=19 value={$FormMAIL}><br>
-			<textarea rows=5 cols=70 wrap=off name=MESSAGE></textarea>
-			<input type=hidden name=bbs value={$BoardID}>
-			<input type=hidden name=key value={$ThreadID}>
+			<input type=submit value="書き込む" name="submit">
+			名前： <input name=FROM size=19 value="{$FormNAME}">
+			E-mail<font size=1> (省略可) </font>: <input name=mail size=19 value="{$FormMAIL}"><br>
+			<textarea rows=5 cols=70 wrap=off name="MESSAGE"></textarea>
+			<input type=hidden name="bbs" value="{$BoardID}">
+			<input type=hidden name="key" value="{$ThreadID}">
 		</form>
 		<br><br>read.php ver {$Version} {$ReleaseDate} <font color=#FE642E><strong>Atnanasi★</strong></font><br>
-		<font color=green><b>Atnanasi ★</b></font> <a href="http://otyakani.dip.jp/~atnanasi/" target="_blank">BBSreadphp</a>
+		<font color=green><b>Atnanasi ★</b></font> <a href="http://otyakani.xyz/~atnanasi/" target="_blank">BBSreadphp</a>
 	</body>
 </html>
 EOT2;

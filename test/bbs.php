@@ -1,15 +1,16 @@
 <?php
-//bbs.php 01.00.00
+//bbs.php 01.01.00
 //Atnanasi
 chdir("..");
 $Root = __DIR__;
-$Version = "01.00.00";
-$ReleaseDate = "2016/1/22";
+$Version = "01.01.00";
+$ReleaseDate = "2016/02/21";
 
 include "./libboard.php";
 
 $NoName = "名無しさん";
 
+$CryptKey = "725d1fa4-59b5-418d-a8bf-dbd53e0dd8c0";
 $expires = 100000;
 
 //共通なヘッダ
@@ -42,16 +43,16 @@ if (isset($_POST["MESSAGE"])) {
 //レスかスレか
 if (isset($_POST["key"])) {
 	$key = $_POST["key"];
-	AddResToThread($bbs, $key, $submit, $FROM, $mail, $MESSAGE, $expires, $NoName);
+	AddResToThread($CryptKey, $bbs, $key, $submit, $FROM, $mail, $MESSAGE, $expires, $NoName);
 }elseif (isset($_POST["subject"])) {
 	$subject = $_POST["subject"];
-	NewThread($bbs, $subject, $submit, $FROM, $mail, $MESSAGE, $expires, $NoName);
+	NewThread($CryptKey, $bbs, $subject, $submit, $FROM, $mail, $MESSAGE, $expires, $NoName);
 }else{
 	ThrowError("不正なヘッダ");
 }
 
 //レス
-function AddResToThread ($bbs, $key, $submit, $FROM, $mail, $MESSAGE, $expires, $NoName) {
+function AddResToThread ($CryptKey, $bbs, $key, $submit, $FROM, $mail, $MESSAGE, $expires, $NoName) {
 	$BoardID = $bbs;
 	$ThreadID = $key;
 	if (ThreadExists($BoardID, $key) === 0) {
@@ -67,7 +68,7 @@ function AddResToThread ($bbs, $key, $submit, $FROM, $mail, $MESSAGE, $expires, 
 		$FROM = $NoName;
 	}
 	
-	AddRes($BoardID, $ThreadID, $FROM, $mail, $MESSAGE);
+	AddRes($CryptKey, $BoardID, $ThreadID, $FROM, $mail, $MESSAGE);
 	
 	echo <<< EOT1
 <html>
@@ -87,7 +88,7 @@ EOT1;
 }
 
 //スレ
-function NewThread ($bbs, $subject, $submit, $FROM, $mail, $MESSAGE, $expires, $NoName) {
+function NewThread ($CryptKey, $bbs, $subject, $submit, $FROM, $mail, $MESSAGE, $expires, $NoName) {
 	$BoardID = $bbs;
 	$ThreadName = $subject;
 	
@@ -100,7 +101,7 @@ function NewThread ($bbs, $subject, $submit, $FROM, $mail, $MESSAGE, $expires, $
 		$FROM = $NoName;
 	}
 	
-	$ThreadID = AddThread($BoardID, $ThreadName, $FROM, $mail, $MESSAGE);
+	$ThreadID = AddThread($CryptKey, $BoardID, $ThreadName, $FROM, $mail, $MESSAGE);
 	
 	echo <<< EOT2
 <html>
