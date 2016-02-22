@@ -209,7 +209,7 @@ echo <<< EOT4
 			</table>
 		</center>
 		<p style="text-align: center; color: #333;">
-			<a href="#">BBSreadphp</a> index.php {$Version} - {$ReleaseDate}<br>
+			<a href="https://github.com/atnanasi/BBSreadphp/">BBSreadphp</a> index.php {$Version} - {$ReleaseDate}<br>
 		 </p>
 	</body>
 </html>
