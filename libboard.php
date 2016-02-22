@@ -1,5 +1,5 @@
 <?php
-//libboard 01.01.00
+//libboard 01.01.01
 //Atnanasi
 
 //エラーを表示する
@@ -100,7 +100,6 @@ function ThreadExists ($BoardID, $ThreadID) {
 	return false;
 }
 
-
 //スレッドを作成して投稿
 function AddThread ($CryptKey, $BoardID, $ThreadName, $FROM, $mail ,$MESSAGE) {
 	$Subject = file_get_contents("./".$BoardID."/subject.txt", true);
@@ -114,7 +113,7 @@ function AddThread ($CryptKey, $BoardID, $ThreadName, $FROM, $mail ,$MESSAGE) {
 	if (strpos($FROM, "#") !== FALSE) {
 		$FROMTripKey = substr($FROM, strpos($FROM, "#"), strlen($FROM));
 		$Trip = MakeTrip($FROMTripKey);
-		$FROMTrip = $FROM.$Trip;
+		$FROMTrip = str_replace($FROMTripKey, $Trip, $FROM);
 	}else{
 		$FROMTrip = $FROM;
 	}
@@ -123,12 +122,12 @@ function AddThread ($CryptKey, $BoardID, $ThreadName, $FROM, $mail ,$MESSAGE) {
 	$Num = GetResNumber($BoardID, $ThreadID)+1;
 	SetResNumber($BoardID, $ThreadID, $Num);
 	$DatFile = "./{$BoardID}/dat/{$ThreadID}.dat";
-	$htmlFROM = htmlspecialchars($FROMTrip);
-	$htmlmail = htmlspecialchars($mail);
+	$htmlFROM = htmlescape($FROMTrip);
+	$htmlmail = htmlescape($mail);
 	$ID = MakeID($_SERVER["REMOTE_ADDR"], $CryptKey);
 	$Date = date("Y/m/d(w) H:i:s.00",time());
 	$DateJP = preg_replace("/\((.+?)\)/", "(".JapaneseDay(date("w")).")", $Date);
-	$BRMESSAGE = \str_replace(array("\r\n", "\r", "\n"),"<br>",htmlspecialchars($MESSAGE));
+	$BRMESSAGE = \str_replace(array("\r\n", "\r", "\n"),"<br>", htmlescape($MESSAGE));
 	$WriteData = " {$htmlFROM}<>{$htmlmail}<>{$DateJP} ID:{$ID}<>{$BRMESSAGE}<>{$ThreadName}";
 	$sfp = fopen( $DatFile, "w" );
 	fwrite($sfp, $WriteData);
@@ -152,12 +151,12 @@ function AddRes ($CryptKey, $BoardID, $ThreadID, $FROM, $mail ,$MESSAGE) {
 		$FROMTrip = $FROM;
 	}
 
-	$htmlFROM = htmlspecialchars($FROMTrip);
-	$htmlmail = htmlspecialchars($mail);
+	$htmlFROM = htmlescape($FROMTrip);
+	$htmlmail = htmlescape($mail);
 	$ID = MakeID($_SERVER["REMOTE_ADDR"], $CryptKey);
 	$Date = date("Y/m/d(w) H:i:s.00",time());
 	$DateJP = preg_replace("/\((.+?)\)/", "(".JapaneseDay(date("w")).")", $Date);
-	$BRMESSAGE = \str_replace(array("\r\n", "\r", "\n"),"<br>",htmlspecialchars($MESSAGE));
+	$BRMESSAGE = \str_replace(array("\r\n", "\r", "\n"),"<br>", htmlescape($MESSAGE));
 	$WriteData = "\n {$htmlFROM}<>{$htmlmail}<>{$DateJP} ID:{$ID}<>{$BRMESSAGE}<>";
 	$sfp = fopen( $DatFile, "a" );
 	fwrite($sfp, $WriteData);
@@ -213,4 +212,13 @@ function MakeTrip($tripkey) {
     $trip = '◆' . $trip;
 
     return $trip;
+}
+
+function htmlescape($data) {
+	$specialchar = htmlspecialchars($data);
+	$ampreplace = str_replace("&", "&amp;", $specialchar);
+	$ltreplace = str_replace("<", "&lt;", $ampreplace);
+	$gtreplace = str_replace(">", "&gt;", $ltreplace);
+	$quotreplace = str_replace('"', "&quot;", $gtreplace);
+	return $quotreplace;
 }
