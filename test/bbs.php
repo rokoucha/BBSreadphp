@@ -10,7 +10,7 @@ include "./libboard.php";
 
 $NoName = "名無しさん";
 
-$CryptKey = "725d1fa4-59b5-418d-a8bf-dbd53e0dd8c0";
+$CryptKey = "test";
 $expires = 100000;
 
 //共通なヘッダ
