@@ -9,6 +9,7 @@ $ResCnt = 5;
 //URL
 $BBSURL = "./index.php";
 $ThisURL = "./index.php";
+$HomeURL = "../";
 
 //名前系
 $BoardName = "BBSreadphp";
