@@ -1,8 +1,8 @@
 <?php
 //BBSreadphp config file
 $Root = __DIR__;
-$Version = "01.01.01";
-$ReleaseDate = "2016/02/22";
+$Version = "01.02.00";
+$ReleaseDate = "2016/02/25";
 
 $ResCnt = 5;
 

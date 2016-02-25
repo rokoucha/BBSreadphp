@@ -1,10 +1,9 @@
 <?php
-//bbs.php 01.01.01
+//bbs.php 01.02.00
 //Atnanasi
 chdir("..");
-$Root = __DIR__;
-$Version = "01.01.01";
-$ReleaseDate = "2016/02/22";
+
+include "./config.php";
 
 include "./libboard.php";
 

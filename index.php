@@ -1,5 +1,5 @@
 <?php
-//BBSreadphp 01.01.01
+//BBSreadphp 01.02.00
 //Atnanasi
 
 include "./config.php";

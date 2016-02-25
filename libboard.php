@@ -1,5 +1,5 @@
 <?php
-//libboard 01.01.01
+//libboard 01.02.00
 //Atnanasi
 
 //エラーを表示する

@@ -1,5 +1,5 @@
 <?php
-//read.php 01.01.01
+//read.php 01.02.00
 //Atnanasi
 chdir("..");
 
