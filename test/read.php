@@ -9,16 +9,28 @@ include "./libboard.php";
 
 //$Config = parse_ini_file("./config.ini",1);
 
+$URLData = str_replace($_SERVER["SCRIPT_NAME"]."/", "", $_SERVER["REQUEST_URI"]);
+$URLQuery = explode("/",$URLData);
+
 if(isset($_GET["bbs"])) {
 	$BoardID = $_GET["bbs"];
+}elseif(isset ($URLQuery[0])){
+	$BoardID = $URLQuery[0];
 }else{
 	ThrowError("不正なURL");
 }
 
 if(isset($_GET["key"])) {
-	if (ThreadExists($BoardID, $_GET["key"])) {
+	if(ThreadExists($BoardID, $_GET["key"])) {
 		$ThreadID = $_GET["key"];
 		$ThreadDat = file_get_contents("./{$BoardID}/dat/{$_GET["key"]}.dat");
+	}else{
+		ThrowError("指定されたスレッドはない。");
+	}
+}elseif(isset ($URLQuery[1])) {
+	if(ThreadExists($BoardID, $URLQuery[1])) {
+		$ThreadID = $URLQuery[1];
+		$ThreadDat = file_get_contents("./{$BoardID}/dat/{$URLQuery[1]}.dat");
 	}else{
 		ThrowError("指定されたスレッドはない。");
 	}
