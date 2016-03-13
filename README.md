@@ -1,4 +1,4 @@
-BBSreadphp
+# BBSreadphp
 ------------------------
 # What's BBSreadphp?
 BBSreadphp is powerful and simple 2ch clone.
