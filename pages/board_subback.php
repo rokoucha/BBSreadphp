@@ -2,8 +2,8 @@
 echo <<< EOT
 <!DOCTYPE html>
 <head>
-<title>{$BBSTitle}</title>
-<meta property="og:title" content="{$BBSTitle}" />
+<title>{$_SETTING["BBS_TITLE"]}</title>
+<meta property="og:title" content="{$_SETTING["BBS_TITLE"]}" />
 <meta property="og:description" content="{$BBSDescription}" />
 <meta property="og:url" content="{$FullPath}" />
 <meta property="og:site_name" content="{$BBSName}" />

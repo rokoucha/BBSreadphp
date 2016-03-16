@@ -18,6 +18,18 @@ switch ($_PATH[0]) {
 		require_once 'functions/bbs_bbsmenu.php';
 		break;
 	
+	case "_service":
+		switch ($_PATH[1]) {
+			case "bbslist.txt":
+				require_once 'functions/bbslist.php';
+				break;
+
+			default:
+				require_once 'functions/404.php';
+				break;
+		}
+		break;
+	
 	case "test":
 		switch ($_PATH[1]) {
 			case "read.cgi":

@@ -1,17 +1,19 @@
+<?php
+echo <<< EOT
 <!DOCTYPE html>
 	<head>
-		<title>#BOARDNAME#</title>
+		<title>{$_SETTING["BBS_TITLE"]}</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta property="og:title" content="#BOARDNAME#"/>
-		<meta property="og:url" content="#THISURL#"/>
-		<meta property="og:description" content="#DESCRIPTION#"/>
+		<meta property="og:title" content="{$_SETTING["BBS_TITLE"]}"/>
+		<meta property="og:url" content="{$FullPath}"/>
+		<meta property="og:description" content="{$BBSDescription}"/>
 		<base href="#BBSURL#">
 		<style>body{margin:0;padding:0;}
 		</style>
 	</head>
 	<body text=#000000 bgcolor="#FFFFFF" link=#0000FF alink=#FF0000 vlink=#660099>
 		<div align=center>
-			<a href="index.php/#BOARDURL#" border=0>#BOARDNAME#</a>
+			<a href="{$FullPath}" border=0>{$_SETTING["BBS_TITLE"]}</a>
 		</div>
 		<table border=1 cellspacing=7 cellpadding=3 width=95% bgcolor=#CCFFCC align=center>
 			<tr>
@@ -20,7 +22,7 @@
 						<tr>
 							<td nowrap COLSPAN=2>
 								<font size=+1>
-									<b>#BOARDNAME#</b>
+									<b>{$_SETTING["BBS_TITLE"]}</b>
 								</font>
 								<br>
 							</td>
@@ -94,3 +96,4 @@
 		 </p>
 	</body>
 </html>
+EOT;
