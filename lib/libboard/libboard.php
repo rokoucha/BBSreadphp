@@ -38,7 +38,7 @@ function SubjectParse($Subject) {
 	$SubjectSplit = preg_split("/<>/", $Subject);
 	
 	$ThreadSplit = preg_split("/ /", $SubjectSplit[1]);
-	preg_match("/\((.+?)\)/", $ThreadSplit[1], $ResNumber);
+	preg_match("/\((.+?)\)$/", $ThreadSplit[1], $ResNumber);
 	
 	$Data["Dat"] = $SubjectSplit[0];
 	$Data["Title"] = $ThreadSplit[0];
@@ -167,7 +167,7 @@ function SetResNumber ($BoardPath, $BoardID, $ThreadID, $Num) {
 	for( $i=0;$i<$Cnt;$i++ ) {
 		$SubjectThreadID = GetDatName($ArraySubject[$i]);
 		if ($SubjectThreadID === $ThreadID.".dat") {
-			$NewSubject[$i] = preg_replace("/\((.+?)\)/", "(".$Num.")", $ArraySubject[$i])."\n";
+			$NewSubject[$i] = preg_replace("/\((.+?)\)$/", "(".$Num.")", $ArraySubject[$i])."\n";
 		}else{
 			$NewSubject[$i] = $ArraySubject[$i]."\n";
 		}
