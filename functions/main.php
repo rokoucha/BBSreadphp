@@ -34,6 +34,8 @@ switch ($_PATH[0]) {
 		
 	default:
 		if (BoardExists($BoardPath, $_PATH[0])) {
+			$BoardID = $_PATH[0];
+			$_SETTING = parse_ini_file($BoardPath."/".$BoardID."/SETTING.TXT");
 			switch ($_PATH[1]) {
 				case "":
 					require_once 'functions/board_index.php';

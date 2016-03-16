@@ -1,6 +1,4 @@
 <?php
-$BoardID = $_PATH[0];
-
 $ErrorText = "404 NotFound";
 
 if (isset($_PATH[2])) {

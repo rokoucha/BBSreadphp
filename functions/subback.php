@@ -1,6 +1,4 @@
 <?php
-$BoardID = $_PATH[0];
-
 $Out->Add("board_subback");
 
 //URL
