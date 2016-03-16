@@ -4,14 +4,15 @@
 // Path config
 
 // index.php path
-// If you don't know where are index.php, write `.`
-$RootFolder = ".";
+// If you don't know where are script dir, write `str_replace("/config/bbs-config.php", "", __FILE__)`
+$RootFolder = str_replace("/config/bbs-config.php", "", __FILE__);
 
 // Board file path
 $BoardPath = $RootFolder."/files/bbs";
 
 // Index.php name
-$IndexPhp = "index.php";
+// If you don't know where are index.php, write `_SERVER["SCRIPT_NAME"]`
+$IndexPath = $_SERVER["SCRIPT_NAME"];
 
 // System config
 
