@@ -1,3 +1,5 @@
+<?php
+return <<< EOT
 <!DOCTYPE html>
 	<head>
 		<title>#TITLE#</title>
@@ -14,8 +16,10 @@
 	<body>
 		<div>
 			<small id="trad">
-						#THREADLIST#
+				#THREADLIST#
 			</small>
 		</div>
 	</body>
 </html>
+EOT;
+?>

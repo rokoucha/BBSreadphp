@@ -1,4 +1,4 @@
 <?php
 //View script
 
-echo $Out;
+echo $Out->Get();

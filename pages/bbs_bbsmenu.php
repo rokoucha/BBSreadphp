@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>BBS MENU for 2ch</TITLE>
 <BASE TARGET="cont">
 </HEAD>

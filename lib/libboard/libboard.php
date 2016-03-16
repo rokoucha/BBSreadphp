@@ -3,8 +3,8 @@
 //Atnanasi
 
 //エラーを表示する
-function ThrowError($text) {
-    echo <<< ThrowErrorEOT
+function MakeError($text) {
+    $data = <<< ThrowErrorEOT
 <html>
     <head>
 	<title>エラー</title>
@@ -15,7 +15,7 @@ function ThrowError($text) {
     </body>
 </html>
 ThrowErrorEOT;
-    exit;
+    return $data;
 }
 
 //1行のDatをパースする
@@ -41,7 +41,6 @@ function SubjectParse($Subject) {
 	preg_match("/\((.+?)\)/", $ThreadSplit[1], $ResNumber);
 	
 	$Data["Dat"] = $SubjectSplit[0];
-	$Data["TitleRes"] = $SubjectSplit[1];
 	$Data["Title"] = $ThreadSplit[0];
 	$Data["Res"] = $ResNumber[1];
 	return $Data;
@@ -49,46 +48,43 @@ function SubjectParse($Subject) {
 
 //1行のSubject.txtをパースしてファイル名を返す
 function GetDatName ($Subject) {
-	$SubjectSplit = preg_split("/<>/", $Subject);
-	$DatFile = $SubjectSplit[0];
-	return $DatFile;
+	$SubjectSplit = SubjectParse($Subject);
+	return $SubjectSplit["Dat"];
 }
 
 //指定されたSubject.txtをパースしてスレッド名を返す
-function GetThreadTitle ($BoardID, $ThreadID) {
-    $Subject = file_get_contents("./".$BoardID."/subject.txt", true);
+function GetThreadTitle ($BoardPath, $BoardID, $ThreadID) {
+    $Subject = file_get_contents($BoardPath."/".$BoardID."/subject.txt", true);
     $ArraySubject = explode("\n", $Subject);
     $Cnt = count($ArraySubject);
     for( $i=0;$i<$Cnt;$i++ ) {
     	$SubjectThreadName = GetDatName($ArraySubject[$i]);
     	if ($SubjectThreadName === $ThreadID.".dat") {
-		    $SubjectSplit = preg_split("/<>/", $ArraySubject[$i]);
-		    $ThreadSplit = preg_split("/ /", $SubjectSplit[1]);
-		    $ThreadName = $ThreadSplit[0];
+		    $SubjectSplit = SubjectParse($ArraySubject[$i]);
+		    $ThreadName = $SubjectSplit["Title"];
 		    return $ThreadName;
 		}
     }
 }
 
 //指定されたSubject.txtをパースしてレス番号を返す
-function GetResNumber ($BoardID, $ThreadID) {
-	$Subject = file_get_contents("./".$BoardID."/subject.txt", true);
+function GetResNumber ($BoardPath, $BoardID, $ThreadID) {
+	$Subject = file_get_contents($BoardPath."/".$BoardID."/subject.txt");
 	$ArraySubject = explode("\n", $Subject);
 	$Cnt = count($ArraySubject);
 	for( $i=0;$i<$Cnt;$i++ ) {
 		$SubjectThreadName = GetDatName($ArraySubject[$i]);
 		if ($SubjectThreadName === $ThreadID.".dat") {
-			$SubjectSplit = preg_split("/<>/", $ArraySubject[$i]);
-			$ThreadSplit = preg_split("/ /", $SubjectSplit[1]);
-			preg_match("/\((.+?)\)/", $ThreadSplit[1], $ResNumber);
+			$SubjectSplit = SubjectParse($ArraySubject[$i]);
+			$ResNumber = $SubjectSplit["Res"];
 			return $ResNumber[1];
 		}
 	}
 }
 
 //指定されたSubject.txtをパースしてスレッドがあるか確認する
-function ThreadExists ($BoardID, $ThreadID) {
-	$Subject = file_get_contents("./".$BoardID."/subject.txt", true);
+function ThreadExists ($BoardPath, $BoardID, $ThreadID) {
+	$Subject = file_get_contents($BoardPath."/".$BoardID."/subject.txt", true);
 	$ArraySubject = explode("\n", $Subject);
 	$Cnt = count($ArraySubject);
 	for( $i=0;$i<$Cnt;$i++ ) {
@@ -101,14 +97,14 @@ function ThreadExists ($BoardID, $ThreadID) {
 }
 
 //スレッドを作成して投稿
-function AddThread ($CryptKey, $BoardID, $ThreadName, $FROM, $mail ,$MESSAGE) {
-	$Subject = file_get_contents("./".$BoardID."/subject.txt", true);
+function AddThread ($CryptKey, $BoardPath, $BoardID, $ThreadName, $FROM, $mail ,$MESSAGE) {
+	$Subject = file_get_contents($BoardPath."/".$BoardID."/subject.txt", true);
 	$ThreadID = time();
-	$sfp = fopen( "./".$BoardID."/subject.txt", "a" );
+	$sfp = fopen( $BoardPath."/".$BoardID."/subject.txt", "a" );
 	fwrite($sfp, "\n{$ThreadID}.dat<>{$ThreadName} (0)");
 	fclose($sfp);
 	
-	touch("./{$BoardID}/dat/".$ThreadID.".dat");
+	touch($BoardPath."/".$BoardID."/dat/".$ThreadID.".dat");
 	
 	if (strpos($FROM, "#") !== FALSE) {
 		$FROMTripKey = substr($FROM, strpos($FROM, "#"), strlen($FROM));
@@ -121,7 +117,7 @@ function AddThread ($CryptKey, $BoardID, $ThreadName, $FROM, $mail ,$MESSAGE) {
 	
 	$Num = GetResNumber($BoardID, $ThreadID)+1;
 	SetResNumber($BoardID, $ThreadID, $Num);
-	$DatFile = "./{$BoardID}/dat/{$ThreadID}.dat";
+	$DatFile = $BoardPath."/".$BoardID."/dat/".$ThreadID.".dat";
 	$htmlFROM = htmlescape($FROMTrip);
 	$htmlmail = htmlescape($mail);
 	$ID = MakeID($_SERVER["REMOTE_ADDR"], $CryptKey);
@@ -137,11 +133,11 @@ function AddThread ($CryptKey, $BoardID, $ThreadName, $FROM, $mail ,$MESSAGE) {
 }
 
 //指定されたスレッドに投稿、Subject.txtのレス番号を変更
-function AddRes ($CryptKey, $BoardID, $ThreadID, $FROM, $mail ,$MESSAGE) {
-	$Subject = file_get_contents("./".$BoardID."/subject.txt", true);
+function AddRes ($CryptKey, $BoardPath, $BoardID, $ThreadID, $FROM, $mail ,$MESSAGE) {
+	$Subject = file_get_contents($BoardPath."/".$BoardID."/subject.txt", true);
 	$Num = GetResNumber($BoardID, $ThreadID)+1;
 	SetResNumber($BoardID, $ThreadID, $Num);
-	$DatFile = "./{$BoardID}/dat/{$ThreadID}.dat";
+	$DatFile = $BoardPath."/".$BoardID."/dat/".$ThreadID.".dat";
 
 	if (strpos($FROM, "#") !== FALSE) {
 		$FROMTripKey = substr($FROM, strpos($FROM, "#"), strlen($FROM));
@@ -164,8 +160,8 @@ function AddRes ($CryptKey, $BoardID, $ThreadID, $FROM, $mail ,$MESSAGE) {
 }
 
 //Subject.txtの指定されたスレッドのレス番号を変更
-function SetResNumber ($BoardID, $ThreadID, $Num) {
-	$Subject = file_get_contents("./".$BoardID."/subject.txt", true);
+function SetResNumber ($BoardPath, $BoardID, $ThreadID, $Num) {
+	$Subject = file_get_contents($BoardPath."/".$BoardID."/subject.txt", true);
 	$ArraySubject = explode("\n", $Subject);
 	$Cnt = count($ArraySubject);
 	for( $i=0;$i<$Cnt;$i++ ) {
@@ -177,7 +173,7 @@ function SetResNumber ($BoardID, $ThreadID, $Num) {
 		}
 	}
 	$NewSubject[$Cnt-1] = rtrim($NewSubject[$Cnt-1]);
-	$fp=fopen("./".$BoardID."/subject.txt","w");
+	$fp=fopen($BoardPath."/".$BoardID."/subject.txt","w");
 	foreach ($NewSubject as $a){
 		fputs($fp, $a);
 	}
@@ -187,7 +183,12 @@ function SetResNumber ($BoardID, $ThreadID, $Num) {
 
 function JapaneseDay ($Day) {
 	$weekday = array( "日", "月", "火", "水", "木", "金", "土" );
-	return $weekday[$Day];
+	if ($Day > 6) {
+		return $weekday[$Day];
+	}else{
+		return;
+	}
+
 }
 
 //IPアドレスからIDを生成する
@@ -221,4 +222,22 @@ function htmlescape($data) {
 	$gtreplace = str_replace(">", "&gt;", $ltreplace);
 	$quotreplace = str_replace('"', "&quot;", $gtreplace);
 	return $quotreplace;
+}
+
+function BoardList($ListPath) {
+	$RawList = file_get_contents($ListPath."/boardlist.txt", true);
+	$List = explode("\n", $RawList);
+	
+	return $List;
+}
+
+function BoardExists($ListPath, $name) {
+	$List = BoardList($ListPath);
+	
+	foreach ($List as $value) {
+		if ($value === $name) {
+			return 1;
+		}
+	}
+	return 0;
 }
