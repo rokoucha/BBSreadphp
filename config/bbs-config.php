@@ -10,6 +10,8 @@ $RootFolder = ".";
 // Board file path
 $BoardPath = $RootFolder."/files/bbs";
 
+// Index.php name
+$IndexPhp = "index.php";
 
 // System config
 
