@@ -75,6 +75,14 @@ switch ($_PATH[0]) {
 					require_once 'functions/dat.php';
 					break;
 
+				case "1001.txt":
+					require_once 'functions/1001.php';
+					break;
+
+				case "head.txt":
+					require_once 'functions/head.php';
+					break;
+
 				default:
 					require_once 'functions/404.php';
 					break;
