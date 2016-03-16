@@ -9,7 +9,7 @@ echo <<< EOT
 		<meta name="KeyWords" CONTENT="{$BBSKeyword}">
 		<meta name="Author" CONTENT="{$BBSAuthor}">
 
-		<title>{$BBSTitle}◎</title>
+		<title>{$BBSTitle}</title>
 	</head>
 	<body>
 		<h1>Yo</h1>
