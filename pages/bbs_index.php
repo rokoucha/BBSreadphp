@@ -13,7 +13,7 @@ echo <<< EOT
 	</head>
 	<body>
 		<h1>Yo</h1>
-		<a href={$RootFolder}/bbsmenu.html>BBSMENU</a>
+		<a href={$IndexPath}/bbsmenu.html>BBSMENU</a>
 	</body>
 </html>
 EOT;
