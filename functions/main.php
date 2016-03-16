@@ -3,6 +3,8 @@
 
 require_once 'config/bbs-config.php';
 
+$FullPath = ((empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+
 switch ($_PATH[0]) {
 	case "":
 		require_once 'functions/bbs_index.php';

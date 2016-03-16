@@ -5,7 +5,7 @@ echo <<< EOT
 <title>{$BBSTitle}</title>
 <meta property="og:title" content="{$BBSTitle}" />
 <meta property="og:description" content="{$BBSDescription}" />
-<meta property="og:url" content="{$ThisURL}" />
+<meta property="og:url" content="{$FullPath}" />
 <meta property="og:site_name" content="{$BBSName}" />
 <meta property="og:locale" content="ja_JP" />
 <base href="{$IndexPath}/test/read.cgi/{$BoardID}/"

@@ -1,9 +1,7 @@
 <?php
 $Out->Set("board_subback");
 
-//URL
-$BBSURL = "index.php";
-$ThisURL = "index.php/{$BoardID}";
+$list = "";
 
 $Subject = file_get_contents($BoardPath."/".$BoardID."/subject.txt", true);
 $ArraySubject = explode("\n", $Subject);

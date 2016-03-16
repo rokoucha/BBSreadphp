@@ -11,8 +11,9 @@ $RootFolder = str_replace("/config/bbs-config.php", "", __FILE__);
 $BoardPath = $RootFolder."/files/bbs";
 
 // Index.php name
-// If you don't know where are index.php, write `_SERVER["SCRIPT_NAME"]`
-$IndexPath = $_SERVER["SCRIPT_NAME"];
+// If you don't know where are index.php, write `((empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"])`
+$IndexPath = ((empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"]);
+
 
 // System config
 
