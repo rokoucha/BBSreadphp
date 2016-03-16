@@ -1,4 +1,3 @@
 <?php
 //View script
-
-echo $Out->Get();
+require_once $RootFolder."/pages/".$Out->Get().".php";

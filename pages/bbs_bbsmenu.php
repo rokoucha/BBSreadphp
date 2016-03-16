@@ -1,11 +1,12 @@
+<?php
+echo <<< EOT
 <HTML>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<TITLE>BBS MENU for 2ch</TITLE>
+<TITLE>BBS MENU for {$BBSName}</TITLE>
 <BASE TARGET="cont">
 </HEAD>
 <BODY TEXT="#CC3300" BGCOLOR="#FFFFFF" link="#0000FF" alink="#ff0000" vlink="#660099">
-<a href=http://www.bb-chat.tv/?2ch_m><img src=http://img.bbchat.tv/images/bannar/7575.gif width=75 height=75 border=0></a>
 <BR>
 <font size=2>
 <A HREF=http://www.2ch.net/ TARGET="_top">2chの入り口</A><br>
@@ -1026,3 +1027,5 @@
 <br>更新日15/01/12
 </font>
 </BODY></HTML>
+
+EOT;

@@ -19,6 +19,6 @@ $BoardPath = $RootFolder."/files/bbs";
 $CryptKey = "The sample key";
 
 // Administrator name
-$AdminName = "Atnanasi★";
+$BBSAdmin = "Atnanasi★";
 
 ?>

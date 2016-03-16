@@ -20,7 +20,7 @@ function GetQueryByPATH() {
 class Output {
 	private $output;
 	
-	public function Add($text) {
+	public function Set($text) {
 		$this->output .= $text;
 	}
 	
@@ -31,7 +31,6 @@ class Output {
 	public function Init() {
 		$this->output = "";
 	}
-	
 }
 
 ?>

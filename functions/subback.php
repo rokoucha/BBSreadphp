@@ -1,6 +1,8 @@
 <?php
 $BoardID = $_PATH[0];
 
+$Out->Add("board_subback");
+
 //URL
 $BBSURL = "index.php";
 $ThisURL = "index.php/{$BoardID}";
@@ -31,4 +33,3 @@ $ReplaceText = str_replace("#RELEASEDATE#", $ReleaseDate, $ReplaceText);
 $ReplaceText = str_replace("#THREADLIST#", $ThreadList, $ReplaceText);
 $ReplaceText = str_replace("#THREADDATA#", $ThreadData, $ReplaceText);
 
-$Out->add($ReplaceText);

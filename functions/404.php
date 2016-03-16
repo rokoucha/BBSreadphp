@@ -1,4 +1,5 @@
 <?php
 // Error,naizo!
+$Out->Set("404");
 
-$Out->Add(MakeError("404 Notfound"));
+$ErrorText = "404 NotFound";
