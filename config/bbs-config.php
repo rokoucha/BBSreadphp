@@ -25,4 +25,13 @@ $CryptKey = "The sample key";
 // Administrator name
 $BBSAdmin = "Atnanasi★";
 
+// View res
+$ResCnt = 5;
+
+// BBS Name
+$BBSName = "BBSreadphp";
+
+// BBS Description
+$BBSDescription = "Simple \"2channel\" clone";
+
 ?>

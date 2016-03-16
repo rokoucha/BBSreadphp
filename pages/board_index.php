@@ -7,7 +7,7 @@ echo <<< EOT
 		<meta property="og:title" content="{$_SETTING["BBS_TITLE"]}"/>
 		<meta property="og:url" content="{$FullPath}"/>
 		<meta property="og:description" content="{$BBSDescription}"/>
-		<base href="#BBSURL#">
+		<base href="{$FullPath}">
 		<style>body{margin:0;padding:0;}
 		</style>
 	</head>
@@ -31,7 +31,7 @@ echo <<< EOT
 						</tr>
 						<tr>
 							<td colspan=3>
-								#ABOUTBOARD#
+								{$BoardDiscription}
 							</td>
 						</tr>
 						<tr>
@@ -40,11 +40,11 @@ echo <<< EOT
 						</tr>
 					</table>
 					<b>
-						<a href=./topost/>書き込む前に読んでね</a>
+						<a href=../topost/>書き込む前に読んでね</a>
 						 | 
-						<a href=./howtouse/>BBSreadphpガイド</a>
+						<a href=../howtouse/>BBSreadphpガイド</a>
 						 | 
-						<a href="./faq/">FAQ</a>
+						<a href="../faq/">FAQ</a>
 					</b>
 				</td>
 			</tr>
@@ -60,7 +60,7 @@ echo <<< EOT
 								<b>スレッド一覧はこちら</b>
 							</a>
 						</div>
-							#THREADLIST#
+							{$ThreadList}
 					</font>
 				</td>
 			</tr>
@@ -69,7 +69,7 @@ echo <<< EOT
 		<table border=1 cellspacing=7 cellpadding=3 width=95% bgcolor="#EFEFEF" align=center>
 			<tr>
 				<td>
-					#THREADDATA#
+					{$ThreadData}
 				</td>
 			</tr>
 		</table><br>
@@ -77,14 +77,14 @@ echo <<< EOT
 			<table border=1 cellspacing=7 cellpadding=3 width=95% bgcolor=#CCFFCC align=center>
 				<tr>
 					<td>
-						<form method=POST action="./test/bbs.php">
+						<form method=POST action="../test/bbs.cgi">
 							<td nowrap>
 								タイトル：<input type=text name=subject size=40>
 								<input type=submit value="新規スレッド作成" name=submit><br>
-								名前：<input type=text name=FROM size=19 value="#FORMNAME#">
-								E-mail：<input type=text name=mail size=19 value="#FORMMAIL#"><br>
+								名前：<input type=text name=FROM size=19 value="{$FormNAME}">
+								E-mail：<input type=text name=mail size=19 value="{$FormMAIL}"><br>
 								内容：<textarea rows=5 cols=60 wrap=OFF name=MESSAGE></textarea>
-								<input type=hidden name=bbs value="#BOARDID#">
+								<input type=hidden name=bbs value="{$BoardID}">
 							</td>
 						</form>
 					</td>
@@ -92,7 +92,7 @@ echo <<< EOT
 			</table>
 		</center>
 		<p style="text-align: center; color: #333;">
-			<a href="https://github.com/atnanasi/BBSreadphp/">BBSreadphp</a> index.php #VERSION# - #RELEASEDATE#<br>
+			<a href="https://github.com/atnanasi/BBSreadphp/">BBSreadphp</a> index.php {$_GLOBAL["application"]["version"]} - {$_GLOBAL["application"]["releasedate"]}<br>
 		 </p>
 	</body>
 </html>
