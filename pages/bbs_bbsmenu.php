@@ -1,8 +1,8 @@
 <?php
-echo <<< EOT
+$data = <<< EOT
 <HTML>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
 <TITLE>BBS MENU for {$BBSName}</TITLE>
 <BASE TARGET="cont">
 </HEAD>
@@ -17,3 +17,5 @@ echo <<< EOT
 </BODY></HTML>
 
 EOT;
+
+echo mb_convert_encoding($data, "SJIS", "UTF-8");

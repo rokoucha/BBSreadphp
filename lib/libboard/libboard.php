@@ -123,7 +123,7 @@ function AddThread ($CryptKey, $BoardPath, $BoardID, $ThreadName, $FROM, $mail ,
 	$Date = date("Y/m/d(w) H:i:s.00",time());
 	$DateJP = preg_replace("/\((.+?)\)/", "(".JapaneseDay(date("w")).")", $Date);
 	$BRMESSAGE = \str_replace(array("\r\n", "\r", "\n"),"<br>", htmlescape($MESSAGE));
-	$WriteData = " {$htmlFROM}<>{$htmlmail}<>{$DateJP} ID:{$ID}<>{$BRMESSAGE}<>{$ThreadName}";
+	$WriteData = "{$htmlFROM}<>{$htmlmail}<>{$DateJP} ID:{$ID}<>{$BRMESSAGE}<>{$ThreadName}\n";
 	$sfp = fopen( $DatFile, "w" );
 	fwrite($sfp, $WriteData);
 	fclose($sfp);
@@ -152,7 +152,7 @@ function AddRes ($CryptKey, $BoardPath, $BoardID, $ThreadID, $FROM, $mail ,$MESS
 	$Date = date("Y/m/d(w) H:i:s.00",time());
 	$DateJP = preg_replace("/\((.+?)\)/", "(".JapaneseDay(date("w")).")", $Date);
 	$BRMESSAGE = \str_replace(array("\r\n", "\r", "\n"),"<br>", htmlescape($MESSAGE));
-	$WriteData = "\n {$htmlFROM}<>{$htmlmail}<>{$DateJP} ID:{$ID}<>{$BRMESSAGE}<>";
+	$WriteData = "{$htmlFROM}<>{$htmlmail}<>{$DateJP} ID:{$ID}<>{$BRMESSAGE}<>\n";
 	$sfp = fopen( $DatFile, "a" );
 	fwrite($sfp, $WriteData);
 	fclose($sfp);

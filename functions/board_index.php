@@ -54,7 +54,7 @@ EOTS1;
 	$ThreadData .= <<< EOTS2
 						<br><br>
 						<dd>
-							<form method=POST action="../test/bbs.php?guid=ON">
+							<form method=POST action="../test/bbs.cgi?guid=ON">
 								<input type=hidden name=bbs value="{$BoardID}">
 								<input type=hidden name=key value="{$ThreadID}">
 								<input type=submit value="書き込む" name="submit">
@@ -63,8 +63,8 @@ EOTS1;
 								<ul>
 									<textarea rows=5 cols=64 wrap=OFF name=MESSAGE></textarea><br>
 									<b>
-									<a href="../test/read.php/{$BoardID}/{$ThreadID}">全部</a>
-									<a href="../test/read.php/{$BoardID}/{$ThreadID}/l50">最新50</a>
+									<a href="../test/read.cgi/{$BoardID}/{$ThreadID}">全部</a>
+									<a href="../test/read.cgi/{$BoardID}/{$ThreadID}/l50">最新50</a>
 										<a href="#menu">板のトップ</a>
 										<a href="./">リロード</a>
 									</b>
