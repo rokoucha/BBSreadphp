@@ -1,0 +1,2 @@
+<?php
+$Out->Set("subject");
