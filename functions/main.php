@@ -75,8 +75,8 @@ switch ($_PATH[0]) {
 					require_once 'functions/dat.php';
 					break;
 
-				case "1001.txt":
-					require_once 'functions/1001.php';
+				case "1000.txt":
+					require_once 'functions/1000.php';
 					break;
 
 				case "head.txt":
