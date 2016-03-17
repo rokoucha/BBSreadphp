@@ -1,17 +1,4 @@
 <?php
-//bbs.php 01.02.00
-//Atnanasi
-chdir("..");
-
-include "./config.php";
-
-include "./libboard.php";
-
-$NoName = "名無しさん";
-
-$CryptKey = "test";
-$expires = 100000;
-
 //共通なヘッダ
 if (isset($_POST["bbs"])) {
 	$bbs = $_POST["bbs"];
@@ -42,80 +29,60 @@ if (isset($_POST["MESSAGE"])) {
 //レスかスレか
 if (isset($_POST["key"])) {
 	$key = $_POST["key"];
-	AddResToThread($CryptKey, $bbs, $key, $submit, $FROM, $mail, $MESSAGE, $expires, $NoName);
+	AddResToThread($CryptKey, $bbs, $key, $submit, $FROM, $mail, $MESSAGE);
 }elseif (isset($_POST["subject"])) {
 	$subject = $_POST["subject"];
-	NewThread($CryptKey, $bbs, $subject, $submit, $FROM, $mail, $MESSAGE, $expires, $NoName);
+	NewThread($CryptKey, $bbs, $subject, $submit, $FROM, $mail, $MESSAGE);
 }else{
 	ThrowError("不正なヘッダ");
 }
 
+
 //レス
-function AddResToThread ($CryptKey, $bbs, $key, $submit, $FROM, $mail, $MESSAGE, $expires, $NoName) {
+function AddResToThread ($CryptKey, $bbs, $key, $submit, $FROM, $mail, $MESSAGE) {
+	global $_GLOBAL, $_PATH, $CookieExpires, $BoardPath, $Out, $ThreadID, $BoardID;
+	
 	$BoardID = $bbs;
 	$ThreadID = $key;
-	if (ThreadExists($BoardID, $key) === 0) {
+	if (ThreadExists($BoardPath, $BoardID, $key) === 0) {
 		ThrowError("存在しないThreadID");
 	}
-
-	setcookie("SETCOOKIE", "OK", time()+$expires);
-	setcookie("NAME", $FROM, time()+$expires);
-	setcookie("MAIL", $mail, time()+$expires);
-	setcookie("EXPIRES", time()+$expires, time()+$expires);
+	
+	$_SETTING = parse_ini_file($BoardPath."/".$BoardID."/SETTING.TXT");
+	
+	setcookie("SETCOOKIE", "OK", time()+$CookieExpires);
+	setcookie("NAME", $FROM, time()+$CookieExpires);
+	setcookie("MAIL", $mail, time()+$CookieExpires);
+	setcookie("EXPIRES", time()+$CookieExpires, time()+$CookieExpires);
 	
 	if ($FROM === "") {
-		$FROM = $NoName;
+		$FROM = $_SETTING["BBS_NONAME_NAME"];
 	}
 	
-	AddRes($CryptKey, $BoardID, $ThreadID, $FROM, $mail, $MESSAGE);
+	AddRes($CryptKey, $BoardPath, $BoardID, $ThreadID, $FROM, $mail, $MESSAGE);
 	
-	echo <<< EOT1
-<html>
-<head>
-<title>書きこみました。</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta content=5;URL=./read.php?bbs={$BoardID}&key={$ThreadID}&ls=50 http-equiv=refresh>
-</head>
-<body>書きこみが終わりました。<br><br>
-画面を切り替えるまでしばらくお待ち下さい。<br><br>
-<br><br><br><br><br>
-<center>
-</center>
-</body>
-</html>
-EOT1;
+	$Out->Set("bbs_res");
 }
 
 //スレ
-function NewThread ($CryptKey, $bbs, $subject, $submit, $FROM, $mail, $MESSAGE, $expires, $NoName) {
+function NewThread ($CryptKey, $bbs, $subject, $submit, $FROM, $mail, $MESSAGE) {
+	global $_GLOBAL, $_PATH, $CookieExpires, $BoardPath, $Out, $ThreadID, $BoardID;
 	$BoardID = $bbs;
 	$ThreadName = $subject;
 	
-	setcookie("SETCOOKIE", "OK", time()+$expires);
-	setcookie("NAME", $FROM, time()+$expires);
-	setcookie("MAIL", $mail, time()+$expires);
-	setcookie("EXPIRES", time()+$expires, time()+$expires);
+	setcookie("SETCOOKIE", "OK", time()+$CookieExpires);
+	setcookie("NAME", $FROM, time()+$CookieExpires);
+	setcookie("MAIL", $mail, time()+$CookieExpires);
+	setcookie("EXPIRES", time()+$CookieExpires, time()+$CookieExpires);
+	
+	$_SETTING = parse_ini_file($BoardPath."/".$BoardID."/SETTING.TXT");
 	
 	if ($FROM === "") {
-		$FROM = $NoName;
+		$FROM = $_SETTING["BBS_NONAME_NAME"];
 	}
 	
-	$ThreadID = AddThread($CryptKey, $BoardID, $ThreadName, $FROM, $mail, $MESSAGE);
+	$ThreadID = AddThread($CryptKey, $BoardPath, $BoardID, $ThreadName, $FROM, $mail, $MESSAGE);
 	
-	echo <<< EOT2
-<html>
-<head>
-<title>書きこみました。</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta content=5;URL=./read.php?bbs={$BoardID}&key={$ThreadID}&ls=50 http-equiv=refresh>
-</head>
-<body>書きこみが終わりました。<br><br>
-画面を切り替えるまでしばらくお待ち下さい。<br><br>
-<br><br><br><br><br>
-<center>
-</center>
-</body>
-</html>
-EOT2;
+	$Out->Set("bbs_thread");
 }
 ?>

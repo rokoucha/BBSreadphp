@@ -114,8 +114,8 @@ function AddThread ($CryptKey, $BoardPath, $BoardID, $ThreadName, $FROM, $mail ,
 	}
 	
 	
-	$Num = GetResNumber($BoardID, $ThreadID)+1;
-	SetResNumber($BoardID, $ThreadID, $Num);
+	$Num = GetResNumber($BoardPath, $BoardID, $ThreadID)+1;
+	SetResNumber($BoardPath, $BoardID, $ThreadID, $Num);
 	$DatFile = $BoardPath."/".$BoardID."/dat/".$ThreadID.".dat";
 	$htmlFROM = htmlescape($FROMTrip);
 	$htmlmail = htmlescape($mail);
@@ -134,8 +134,8 @@ function AddThread ($CryptKey, $BoardPath, $BoardID, $ThreadName, $FROM, $mail ,
 //指定されたスレッドに投稿、Subject.txtのレス番号を変更
 function AddRes ($CryptKey, $BoardPath, $BoardID, $ThreadID, $FROM, $mail ,$MESSAGE) {
 	$Subject = file_get_contents($BoardPath."/".$BoardID."/subject.txt", true);
-	$Num = GetResNumber($BoardID, $ThreadID)+1;
-	SetResNumber($BoardID, $ThreadID, $Num);
+	$Num = GetResNumber($BoardPath, $BoardID, $ThreadID)+1;
+	SetResNumber($BoardPath, $BoardID, $ThreadID, $Num);
 	$DatFile = $BoardPath."/".$BoardID."/dat/".$ThreadID.".dat";
 
 	if (strpos($FROM, "#") !== FALSE) {

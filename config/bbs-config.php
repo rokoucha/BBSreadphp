@@ -22,11 +22,17 @@ $IndexPath = ((empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HT
 // If complete setup,You need change this string.
 $CryptKey = "The sample key";
 
-// Administrator name
-$BBSAdmin = "Atnanasi★";
-
 // View res
 $ResCnt = 5;
+
+// Cookie(star) expires
+$CookieExpires = 100000;
+
+
+// BBS config
+
+// Administrator name
+$BBSAdmin = "Atnanasi★";
 
 // BBS Name
 $BBSName = "BBSreadphp";
