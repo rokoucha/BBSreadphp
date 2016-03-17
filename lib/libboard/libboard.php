@@ -76,8 +76,7 @@ function GetResNumber ($BoardPath, $BoardID, $ThreadID) {
 		$SubjectThreadName = GetDatName($ArraySubject[$i]);
 		if ($SubjectThreadName === $ThreadID.".dat") {
 			$SubjectSplit = SubjectParse($ArraySubject[$i]);
-			$ResNumber = $SubjectSplit["Res"];
-			return $ResNumber[1];
+			return $SubjectSplit["Res"];
 		}
 	}
 }

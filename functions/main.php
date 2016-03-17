@@ -5,6 +5,22 @@ require_once 'config/bbs-config.php';
 
 $FullPath = ((empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
 
+if (isset($_COOKIE["SETCOOKIE"])) {
+	$FormMAIL = $_COOKIE["MAIL"];
+	if (isset($_COOKIE["NAME"])) {
+		$FormNAME = $_COOKIE["NAME"];
+	}else{
+		$FormNAME ="";
+	}
+}else{
+	$FormNAME = "";
+	$FormMAIL = "";
+	setcookie("SETCOOKIE", "", time()-1);
+	setcookie("NAME", "", time()-1);
+	setcookie("MAIL", "", time()-1);
+	setcookie("EXPIRES", "", time()-1);
+}
+
 switch ($_PATH[0]) {
 	case "":
 		require_once 'functions/bbs_index.php';

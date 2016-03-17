@@ -7,7 +7,7 @@ echo <<< EOT
 		<meta http-equiv="Content-Style-Type" content="text/css"/>
 		<meta name="Description" CONTENT="{$BBSDescription}">
 		<meta name="KeyWords" CONTENT="{$BBSKeyword}">
-		<meta name="Author" CONTENT="{$BBSAuthor}">
+		<meta name="Author" CONTENT="{$BBSAdmin}">
 
 		<title>{$BBSTitle}</title>
 	</head>

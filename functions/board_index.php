@@ -1,26 +1,7 @@
 <?php
 $Out->Set("board_index");
-$ErrorText = "404 NotFound";
 
 $BoardDiscription = file_get_contents($BoardPath."/".$BoardID."/head.txt");
-
-if (isset($_COOKIE["SETCOOKIE"])) {
-	$FormMAIL = $_COOKIE["MAIL"];
-	if (isset($_COOKIE["NAME"])) {
-		$FormNAME = $_COOKIE["NAME"];
-	}else{
-		$FormNAME ="";
-	}
-}else{
-	$FormNAME = "";
-	$FormMAIL = "";
-	setcookie("SETCOOKIE", "", time()-1);
-	setcookie("NAME", "", time()-1);
-	setcookie("MAIL", "", time()-1);
-	setcookie("EXPIRES", "", time()-1);
-}
-
-$FileSize = "";
 
 $ThreadList = "";
 $ThreadData = "";
