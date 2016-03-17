@@ -56,7 +56,7 @@ echo <<< EOT
 				<td>
 					<font size=2>
 						<div align="left">
-							<a href="subback.php">
+							<a href="subback.html">
 								<b>スレッド一覧はこちら</b>
 							</a>
 						</div>
